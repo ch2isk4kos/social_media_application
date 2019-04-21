@@ -18,6 +18,7 @@ gem 'uglifier', '>= 1.3.0'
 
 # ADDITIONAL GEMS
 gem 'bootstrap-sass', '~> 3.4'
+gem 'devise', '~> 4.6'
 
 gem 'jquery-rails'
 
