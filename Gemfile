@@ -20,6 +20,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'bootstrap-sass', '~> 3.4'
 gem 'bootstrap_form'
 gem 'devise', '~> 4.6'
+gem 'will_paginate', '~> 3.1'
 
 gem 'jquery-rails'
 
