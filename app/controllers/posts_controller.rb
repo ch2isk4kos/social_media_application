@@ -4,6 +4,9 @@ class PostsController < ApplicationController
     before_action :redirect_if_not_signed_in, only: [:new]
 
     def show
+        if user_signed_in?
+            @message_has_been_sent = conversation_exist?
+        end
     end
 
     def new
@@ -73,5 +76,9 @@ class PostsController < ApplicationController
         else
             posts = Post.all.order('created_at DESC')
         end
+    end
+
+    def conversation_exist?
+        Private::Conversation.between_users(current_user.id, @post.user.id).present?
     end
 end
