@@ -1,8 +1,25 @@
 class PostsController < ApplicationController
 
     before_action :find_post, only: [:show]
+    before_action :redirect_if_not_signed_in, only: [:new]
 
     def show
+    end
+
+    def new
+        @branch = params[:branch]
+        @categories = Category.where(branch: @branch)
+        @post = Post.new
+    end
+
+    def create
+        @post = Post.new(post_params)
+
+        if @post.save
+            redirect_to post_path(@post)
+        else
+            redirect_to root_path
+        end
     end
 
     # categories
@@ -36,8 +53,9 @@ class PostsController < ApplicationController
         @post = Post.find(params[:id])
     end
 
-    # def post_params
-    # end
+    def post_params
+        params.require(:post).permit(:content, :title, :category_id).merge(user_id: current_user.id)
+    end
 
     def get_posts
         branch = params[:action]
